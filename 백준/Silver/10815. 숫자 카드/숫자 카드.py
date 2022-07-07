@@ -1,11 +1,19 @@
 import sys
 input=sys.stdin.readline
+
+def check(x):
+    l=-1
+    r=n
+    while l+1<r:
+        mid=(l+r)//2
+        if number[mid]==x:return 1
+        if number[mid]>x:r=mid
+        else:l=mid
+    return 0
+
 n=int(input())
-lst1=list(map(int,input().split()))
-counted=[0 for i in range(20000001)]
-for x in lst1:
-    counted[x+10000000]+=1
-m=int(input())
-lst2=list(map(int,input().split()))
-for x in lst2:
-    print(counted[x+10000000],end=' ')
+number=list(map(int,input().split()))
+number.sort()
+input()
+for x in list(map(int,input().split())):
+    print(check(x), end=' ')
