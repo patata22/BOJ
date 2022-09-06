@@ -1,11 +1,10 @@
-import sys
-input=sys.stdin.readline
-count=[0 for i in range(20000001)]
-n=int(input())
-lst1=list(map(int,input().split()))
-for x in lst1:
-    count[x+10000000]+=1
-m=int(input())
-lst2=list(map(int,input().split()))
-for y in lst2:
-    print(count[y+10000000], end=' ')
+input()
+cnt={}
+for x in list(map(int,input().split())):
+    if x not in cnt:
+        cnt[x]=1
+    else:cnt[x]+=1
+input()
+for x in map(int,input().split()):
+    if x not in cnt:print(0,end=' ')
+    else:print(cnt[x],end=' ')
