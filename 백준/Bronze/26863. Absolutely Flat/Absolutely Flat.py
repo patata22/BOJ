@@ -1,0 +1,5 @@
+leg=sorted([int(input()) for i in range(4)])
+pad=int(input())
+if leg[0]==leg[-1]:print(1)
+elif leg[0]!=leg[1] and leg[0]+pad==leg[-1]:print(1)
+else: print(0)
