@@ -1,4 +1,4 @@
-# [Gold IV] 중량제한 - 1939 
+# [Gold III] 중량제한 - 1939 
 
 [문제 링크](https://www.acmicpc.net/problem/1939) 
 
