@@ -1,0 +1,5 @@
+input()
+s=list(input())
+if s[-1]=='G': s.pop()
+else: s.append('G')
+print(''.join(s))
