@@ -8,14 +8,15 @@ def sol():
     for i in range(n):
         temp=input()
         for j in range(m):
+            dp[i][j]%=DIV
             x=dp[i][j]
             if temp[j]=='B':
-                dp[i][j+1]=(x+dp[i][j+1])%DIV
-                dp[i+1][j]=(x+dp[i+1][j])%DIV
+                dp[i][j+1]+=x
+                dp[i+1][j]+=x
             elif temp[j]=='S':
-                dp[i+1][j]=(x+dp[i+1][j])%DIV
+                dp[i+1][j]+=x
             else:
-                dp[i][j+1]=(x+dp[i][j+1])%DIV
+                dp[i][j+1]+=x
     return dp[-2][-2]
 
 print(sol())
