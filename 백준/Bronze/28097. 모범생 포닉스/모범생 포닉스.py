@@ -1,0 +1,1 @@
+print(*divmod(8*(int(input())-1)+sum(map(int,input().split())),24))
