@@ -201,10 +201,12 @@ class Cube {
     }
 
     public void printAnswer() {
+        StringBuilder sb = new StringBuilder();
         for(int i=0;i<9;i++){
-            System.out.print(parts[i].u);
-            if(i%3==2) System.out.println();
+            sb.append(parts[i].u);
+            if(i%3==2) sb.append('\n');
         }
+        System.out.print(sb);
 
     }
 }
