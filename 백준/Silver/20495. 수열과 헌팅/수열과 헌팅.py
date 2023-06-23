@@ -1,5 +1,26 @@
-import sys,bisect
+import sys
 input=sys.stdin.readline
+
+def binary_left(x):
+    l=-1
+    r=n
+    while l+1<r:
+        mid=(l+r)//2
+        if big[mid]>=x:
+            r=mid
+        else: l=mid
+    return r
+
+def binary_right(x):
+    l=-1
+    r=n
+    while l+1<r:
+        mid=(l+r)//2
+        if small[mid]>x:
+            r=mid
+        else: l=mid
+    return r
+
 
 n=int(input())
 
@@ -19,5 +40,5 @@ big.sort()
 small.sort()
 
 for a,b in original:
-    print(bisect.bisect_left(big,a-b)+1,bisect.bisect_right(small,a+b))
+    print(binary_left(a-b)+1,binary_right(a+b))
 
