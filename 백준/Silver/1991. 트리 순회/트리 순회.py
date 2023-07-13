@@ -1,29 +1,30 @@
-def pre(root):
-    if root!='.':
-        print(root,end='')
-        pre(tree[root][0])
-        pre(tree[root][1])
-def mid(root):
-    if root!='.':
-        mid(tree[root][0])
-        print(root,end='')
-        mid(tree[root][1])
-def post(root):
-    if root!='.':
-        post(tree[root][0])
-        post(tree[root][1])
-        print(root,end='')
-        
+def preorder(x):
+    print(x,end='')
+    b,c=graph[x]
+    if b!='.':preorder(b)
+    if c!='.':preorder(c)
 
+def order(x):
+    b,c=graph[x]
+    if b!='.':order(b)
+    print(x,end='')
+    if c!='.':order(c)
 
+def postorder(x):
+    b,c=graph[x]
+    if b!='.':postorder(b)
+    if c!='.':postorder(c)
+    print(x,end='')
 n=int(input())
-tree={}
+graph={}
 for _ in range(n):
-    root,left,right=input().split()
-    tree[root]=[left,right]
+    a, b, c = input().split()
+    graph[a]= []
+    graph[a].append(b)
+    graph[a].append(c)
 
-pre('A')
+preorder('A')
 print()
-mid('A')
+order('A')
 print()
-post('A')
+postorder('A')
