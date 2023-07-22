@@ -50,16 +50,12 @@ for t in range(int(input())):
         if not visited[i]:
             dfs(i)
 
-    scc_graph=[set() for i in range(scc_cnt+1)]
     indegree=[0]*(scc_cnt+1)
-    for scc in SCC:
-        findSccGraph(scc)
-    for graph in scc_graph:
-        for to in graph:
-            indegree[to]+=1
+    for now in range(1,n+1):
+        for to in graph[now]:
+            if scc_num[now]!=scc_num[to]:
+                indegree[scc_num[to]]+=1
     answer=0
     for i in range(1,scc_cnt+1):
         if not indegree[i]: answer+=1
     print(answer)
-    
-    
