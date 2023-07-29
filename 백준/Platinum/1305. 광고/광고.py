@@ -10,5 +10,5 @@ def failure(s):
     return fail
 
 n=int(input())
-fail = failure(input())
+fail = failure(list(input()))
 print(n-fail[-1])
