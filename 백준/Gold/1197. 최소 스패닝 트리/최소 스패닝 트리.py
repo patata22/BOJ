@@ -9,7 +9,7 @@ def find(a):
 def union(a,b):
     pa = find(a)
     pb = find(b)
-    if pa!=pb: parent[b]=pa
+    if pa!=pb: parent[pb]=pa
 
 def kruskal():
     answer=0
