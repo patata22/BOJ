@@ -1,0 +1,5 @@
+input()
+t=sum(map(int,input().split()))
+if t>0:print('Right')
+elif t==0:print('Stay')
+else:print('Left')
