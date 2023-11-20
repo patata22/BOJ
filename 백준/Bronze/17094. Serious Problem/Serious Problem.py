@@ -1,0 +1,7 @@
+input()
+x=input()
+two=x.count('2')
+eee=x.count('e')
+if two>eee: print(2)
+elif two<eee:print('e')
+else:print('yee')
