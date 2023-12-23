@@ -1,0 +1,1 @@
+for _ in range(int(input())):print(f'Case #{_+1}:',*input().split()[::-1])
