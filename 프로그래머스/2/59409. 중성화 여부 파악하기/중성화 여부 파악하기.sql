@@ -1,0 +1,1 @@
+select animal_id, name, if(sex_upon_intake like '%Spayed%' or sex_upon_intake like '%Neutered%', 'O', 'X') from animal_ins;
