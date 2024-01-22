@@ -7,7 +7,7 @@ def sol(X,Y):
     global long,answer
     q=deque()
     q.append((X,Y))
-    before=deque()   
+    before=deque()
     visited=[[0]*m for i in range(n)]
     visited[X][Y]=1
     t=1
@@ -32,7 +32,7 @@ def sol(X,Y):
                 answer=temp
             elif t==long:
                 answer=max(answer,temp)
-                
+
 n,m=map(int,input().split())
 board=[list(map(int,input().split())) for i in range(n)]
 answer=0
@@ -40,5 +40,7 @@ long=0
 for i in range(n):
     for j in range(m):
         if board[i][j]:
+            if 1<i<n-1 and board[i-1][j] and board[i+1][j]:continue
+            if 1<j<m-1 and board[i][j-1] and board[i][j+1]:continue
             sol(i,j)
 print(answer)
