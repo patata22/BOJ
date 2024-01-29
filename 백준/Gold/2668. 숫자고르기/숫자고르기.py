@@ -1,27 +1,27 @@
-def dfs(now, record):
-    global answer
+def dfs(now):
     visited[now]=1
-    to=number[now]
-    if to in record:
-        answer+=len(record)-record.index(to)
-        for i in range(record.index(to),len(record)):
-            cycle.append(record[i])
-        return
+    nxt=number2[now]
+    if visited[nxt] and not finished[nxt]:
+        answer.append(nxt)
+        while nxt!=now:
+            nxt=number2[nxt]
+            answer.append(nxt)       
     else:
-        if not visited[to]:
-            record.append(to)
-            dfs(to,record)
-
+        if not visited[nxt]:
+            dfs(nxt)
+    finished[now]=1
 
 n=int(input())
-number=[0]+[int(input()) for i in range(n)]
+number=[i for i in range(n+1)]
+number2=[0]
+for _ in range(n):
+    number2.append(int(input()))
 visited=[0]*(n+1)
-answer=0
-cycle=[]
+finished=[0]*(n+1)
+answer=[]
 for i in range(1,n+1):
     if not visited[i]:
-        dfs(i,[i])
-print(answer)
-cycle.sort()
-for x in cycle:print(x)
-
+        dfs(i)
+answer.sort()
+print(len(answer))
+print(*answer,sep='\n')
