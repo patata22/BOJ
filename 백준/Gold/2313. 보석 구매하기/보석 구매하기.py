@@ -6,24 +6,25 @@ answer=[]
 
 for _ in range(int(input())):
     n=int(input())
-    number=[0]+list(map(int,input().split()))
-    for i in range(1,n+1):
-        number[i]+=number[i-1]
+    number=list(map(int,input().split()))
     l=0
-    r=0
+    L,R=0,0
     value=-float('inf')
-    for i in range(1,n+1):
-        for j in range(1,i+1):
-            temp=number[i]-number[j-1]
-            if temp>value:
-                value=temp
-                l,r=j,i
-            elif temp==value and r-l>i-j:
-                l,r=j,i
-                
+    temp=0
+    for i in range(n):
+        curr= number[i]
+        temp+=curr
+        if curr>=temp:
+            temp=curr
+            l=i
+        if temp>value:
+            value=temp
+            L,R=l,i
+        elif temp==value:
+            if R-L>i-l:
+                L,R=l,i
     V+=value
-    answer.append((l,r))
-
+    answer.append((L+1,R+1))
 print(V)
-for x in answer:print(*x)
-                
+for x in answer:
+    print(*x) 
