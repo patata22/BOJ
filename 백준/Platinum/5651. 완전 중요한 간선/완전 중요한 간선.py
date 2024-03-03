@@ -12,7 +12,7 @@ def makeFlow():
         while q:
             now=q.popleft()
             for to in graph[now]:
-                if prev[to]==-1 and capa[now][to]-flow[now][to]>0:
+                if prev[to]==-1 and capa[now][to]>0:
                     q.append(to)
                     prev[to]=now
                     if now==END: break
@@ -20,12 +20,12 @@ def makeFlow():
         now=END
         maxFlow=float('inf')
         while now!=START:
-            maxFlow=min(maxFlow,capa[prev[now]][now]-flow[prev[now]][now])
+            maxFlow=min(maxFlow,capa[prev[now]][now])
             now=prev[now]
         now=END
         while now!=START:
-            flow[prev[now]][now]+=maxFlow
-            flow[now][prev[now]]-=maxFlow
+            capa[prev[now]][now]-=maxFlow
+            capa[now][prev[now]]+=maxFlow
             now=prev[now]
             
 def check(start,end):
@@ -36,7 +36,7 @@ def check(start,end):
         now=q.popleft()
         if now==end:  return 0
         for to in graph[now]:
-            if capa[now][to]-flow[now][to]>0 and not visited[to]:
+            if capa[now][to]>0 and not visited[to]:
                 visited[to]=1
                 q.append(to)
     return 1
@@ -47,8 +47,6 @@ for tt in range(int(input())):
     graph=[[] for i in range(n+1)]
     graphs=[]
     capa=[[0]*(n+1) for i in range(n+1)]
-    flow=[[0]*(n+1) for i in range(n+1)]
-
     for _ in range(m):
         a,b,c=map(int,input().split())
         graph[a].append(b)
@@ -59,6 +57,6 @@ for tt in range(int(input())):
     makeFlow()
     answer=0
     for a,b in graphs:
-        if capa[a][b]==flow[a][b]:
+        if capa[a][b]==0:
             answer+=check(a,b)
     print(answer)
