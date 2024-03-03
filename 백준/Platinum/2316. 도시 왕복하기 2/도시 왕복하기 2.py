@@ -2,47 +2,48 @@ from collections import deque
 import sys
 input=sys.stdin.readline
 
-def makeFlow(n):
-    if n==1: return
-    flow[p[n]][n]+=1
-    flow[n][p[n]]-=1
-    makeFlow(p[n])
+START=401
+END=2
 
-n,p=map(int,input().split())
-capacity = [[0]*(2*n+1) for i in range(2*n+1)]
-flow = [[0]*(2*n+1) for i in range(2*n+1)]
-graph = [[] for i in range(2*n+1)]
-answer=0
+def sol():
+    total=0
+    while True:
+        q=deque()
+        prev=[-1]*801
+        q.append(START)
+        while q:
+            now=q.popleft()
+            for to in graph[now]:
+                if prev[to]<0 and capa[now][to]>0:
+                    prev[to]=now
+                    q.append(to)
+                if prev[END]>0: break
+        if prev[END]==-1: break
+        
+        total+=1
+        now=END
+        while now!=START:
+            capa[prev[now]][now]-=1
+            capa[now][prev[now]]+=1
+            now=prev[now]
+    return total        
+
+n,m=map(int,input().split())
+graph=[[] for i in range(801)]
+capa=[[0]*801 for i in range(801)]    
+
 for i in range(1,n+1):
-    capacity[i][i+n]=1
-    capacity[i+n][i]=1
-    graph[i].append(i+n)
-
-capacity[1][1+n]=float('inf')
-
-for i in range(p):
-    a,b= map(int,input().split())
-    graph[a+n].append(b)
-    graph[b].append(a+n)
-    capacity[a+n][b]=1
-    graph[b+n].append(a)
-    graph[a].append(b+n)
-    capacity[b+n][a]=1
+    graph[i].append(i+400)
+    capa[i][i+400]=1
+    capa[i+400][i]=1
     
+for i in range(m):
+    a,b=map(int,input().split())
+    graph[a+400].append(b)
+    graph[b].append(a+400)
+    capa[a+400][b]+=1
 
-while True:
-    p=[-1]*(2*n+1)
-    q=deque()
-    q.append(1)
-    while q:
-        now=q.popleft()
-        for to in graph[now]:
-            if capacity[now][to]-flow[now][to]>0 and p[to]==-1:
-                p[to]=now
-                q.append(to)
-    
-    if p[2]==-1: break
-    makeFlow(2)
-    answer+=1
-
-print(answer)
+    graph[b+400].append(a)
+    graph[a].append(b+400)
+    capa[b+400][a]+=1
+print(sol())
