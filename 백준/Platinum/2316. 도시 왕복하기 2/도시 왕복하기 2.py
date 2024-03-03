@@ -35,7 +35,6 @@ capa=[[0]*801 for i in range(801)]
 for i in range(1,n+1):
     graph[i].append(i+400)
     capa[i][i+400]=1
-    capa[i+400][i]=1
     
 for i in range(m):
     a,b=map(int,input().split())
