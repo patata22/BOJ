@@ -1,25 +1,27 @@
 import sys
 input=sys.stdin.readline
 
-def dfs(x):
-    if visited[x]:return False
-    visited[x]=1
-    for y in cow[x]:
-        if house[y]==0 or dfs(house[y]):
-            house[y]=x
-            return True
-    return False
+def dfs(now):
+    visited[now]=1
+    for to in graph[now]:
+        if house[to]==0 or (not visited[house[to]] and dfs(house[to])):
+            cow[x]=to
+            house[to]=now
+            return 1
+    return 0
+            
 
 n,m=map(int,input().split())
-cow=[[] for i in range(n+1)]
-answer=0
+graph=[[] for i in range(n+1)]
+
 for i in range(1,n+1):
-    temp=list(map(int,input().split()))
-    for j in temp[1:]:cow[i].append(j)
+    for x in list(map(int,input().split()))[1:]:
+        graph[i].append(x)
+cow=[0]*(m+1)
 house=[0]*(m+1)
+answer=0
 
 for i in range(1,n+1):
     visited=[0]*(n+1)
-    if dfs(i): answer+=1
-
+    answer+=dfs(i)
 print(answer)
