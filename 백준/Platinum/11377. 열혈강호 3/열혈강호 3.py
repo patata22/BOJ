@@ -1,39 +1,38 @@
 import sys
 input=sys.stdin.readline
 
-def dfs(x):
-    if visited[x]: return False
-    visited[x]=1
-    for t in task[x][1:]:
-        if solved[t]==-1 or dfs(solved[t]):
-            solved[t]=x
-            return True
-def dfs2(x):
-    if visited[x]: return False
-    visited[x]=1
-    for t in task2[x][1:]:
-        if solved[t]==-1 or dfs(solved[t]):
-            solved[t]=x
-            return True
-    
 
+def dfs(now):
+    visited[now]=1
+    for to in graph[now]:
+        if not work[to] or (not visited[work[to]] and dfs(work[to])):
+            work[to]=now
+            worker[now]=to
+            return 1
+    return 0
+                            
 n,m,k=map(int,input().split())
-task=[]
-task2=[]
-for i in range(n):
-    temp=list(map(int,input().split()))
-    task.append(temp)
-    task2.append(temp)
-solved= [-1]*(m+1)
+
+graph=[[] for i in range(2*n+2)]
+worker=[0]*(2*n+2)
+work=[0]*(m+1)
+
+for i in range(1,n+1):
+    for x in list(map(int,input().split()))[1:]:
+        graph[2*i].append(x)
+        graph[2*i+1].append(x)
+
 answer=0
-for i in range(n):
-    visited=[0]*(n)
-    if dfs(i):answer+=1
+
+for i in range(1,n+1):
+    visited=[0]*(2*n+2)
+    answer+=dfs(2*i)
+
 count=0
-for i in range(n):
-    visited=[0]*(n)
-    if dfs2(i):
-        answer+=1
-        count+=1
+for i in range(1,n+1):
+    visited=[0]*(2*n+2)
+    result = dfs(2*i+1)
+    answer+=result
+    count+=result
     if count==k: break
 print(answer)
