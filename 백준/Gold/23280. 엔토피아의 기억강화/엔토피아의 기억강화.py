@@ -1,5 +1,6 @@
 board=[[1,2,3],[4,5,6],[7,8,9],[10,11,12]]
 distance = [[float('inf')]*13 for i in range(13)]
+
 n,a,b=map(int,input().split())
 
 for i in range(4):
@@ -13,11 +14,14 @@ for i in range(4):
                 distance[e][s]=dist
 
 number=list(map(int,input().split()))
-dp=[[[float('inf')]*13 for i in range(13)] for i in range(n+1)]
-dp[0][1][3]=0
+start=number[0]
+dp=[[[float('inf')]*13 for i in range(13)] for i in range(n)]
 
-for i in range(1,n+1):
-    target=number[i-1]
+dp[0][start][3]=distance[1][start]+a
+dp[0][1][start]=distance[start][3]+b
+
+for i in range(1,n):
+    target=number[i]
     for l in range(13):
         for r in range(13):
             if dp[i-1][l][r]==float('inf'): continue
@@ -29,6 +33,7 @@ answer=float('inf')
 
 for i in range(13):
     for j in range(13):
-        answer=min(dp[-1][i][j],answer)
+        if i==number[-1] or j==number[-1]:
+            answer=min(answer,dp[-1][i][j])
             
 print(answer)
