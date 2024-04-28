@@ -53,7 +53,8 @@ cnt2=fill()
 
 
 if cnt1==a and cnt2==b:
+    print(1)
     for i in range(n):
-        print(*board[i])
+        print(*board[i],sep='')
 else:
     print(-1)
