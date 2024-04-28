@@ -7,13 +7,14 @@ dy=(0,0,-1,1)
 def fillA():
     row=0
     cnt1=0
-    while cnt1<a and row<n:
+    while cnt1<a and row<2*n+1:
         x=row
         y=0
-        while 0<=x<n and 0<=y<n:
-            cnt1+=1
-            board[x][y]=1
-            if cnt1==a: return cnt1
+        while 0<=x:
+            if 0<=x<n and 0<=y<n:
+                cnt1+=1
+                board[x][y]=1
+                if cnt1==a: return cnt1
             x-=1
             y+=1
         row+=1
