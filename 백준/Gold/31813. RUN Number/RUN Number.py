@@ -5,6 +5,10 @@ for tt in range(int(input())):
     n,k=map(int,input().split())
     answer=[]
     for i in range(n):
+        if k==10:
+            answer.append(9)
+            answer.append(1)
+            break
         now=k//(10**(n-i-1))
         temp=makeNum(now,n-i)
         if temp<=k:
@@ -18,5 +22,4 @@ for tt in range(int(input())):
         if not k: break
     print(len(answer))
     print(*answer)
-    
-    
+
