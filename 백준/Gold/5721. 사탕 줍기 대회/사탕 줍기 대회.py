@@ -14,6 +14,4 @@ def sol(lst):
 while True:
     n,m=map(int,input().split())
     if n==0: break
-    score=[sol(list(map(int,input().split()))) for i in range(n)]
-    print(sol(score))
-    
+    print(sol([sol(list(map(int,input().split()))) for i in range(n)]))
