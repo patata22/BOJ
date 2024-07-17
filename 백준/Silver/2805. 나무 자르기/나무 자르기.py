@@ -1,14 +1,17 @@
+def check(mid):
+    total=0
+    for t in tree:
+        if t>mid: total+=t-mid
+    return total>=m
+def sol():
+    l=-1
+    r=1000000000
+    while l+1<r:
+        mid=(l+r)//2
+        if check(mid): l=mid
+        else: r=mid
+    return l
+        
 n,m=map(int,input().split())
-tree=list(map(int,input().split()))
-l=0
-r=2000000001
-while l+1<r:
-    
-    mid=(l+r)//2
-    temp=0
-    for x in tree:
-        temp+=max(x-mid,0)
-    if temp>=m:
-        l=mid
-    else: r=mid
-print(l)
+tree=tuple(map(int,input().split()))
+print(sol())
