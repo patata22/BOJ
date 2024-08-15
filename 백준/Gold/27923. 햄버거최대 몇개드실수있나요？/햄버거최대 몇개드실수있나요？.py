@@ -13,12 +13,8 @@ for i in range(1,n+1):
 
 hamburger.sort()
 prefix.sort()
-two={}
-for x in prefix:
-    if x not in two:
-        two[x]=2**x
 answer=0
 while hamburger:
-    answer+=int(hamburger.pop()/(two[prefix.pop()]))
+    answer+=hamburger.pop()>>prefix.pop()
 
 print(answer)
