@@ -1,30 +1,33 @@
+
 import sys,heapq
 input=sys.stdin.readline
 
-def dijkstra():
+def sol():
     q=[]
     q.append((0,0,1))
-    distance[1][0]=0
+    distance=[[float('inf')]*(M+1) for i in range(n+1)]
+    distance[1]=[0]*(M+1)
     while q:
-        time, cost, now = heapq.heappop(q)
-        if distance[now][cost]!=time: continue
-        if now == n: return time
-        for v,c,d in graph[now]:
-            C=cost+c
-            T=time+d
-            if C<=m and distance[v][C]>T:
-                for p in range(C,m+1):
-                    if distance[v][p]>T:distance[v][p]=T
-                    else: break
-                heapq.heappush(q,(time+d,cost+c,v))
-    return 'Poor KCM'
+        time,money,now=heapq.heappop(q)
+        if distance[now][money]!=time: continue
+        if now==n: return time
+        for to,m,t in graph[now]:
+            if money+m>M:continue
+            if distance[to][money+m]>time+t:
+                distance[to][money+m]=time+t
+                for i in range(money+m+1,M+1):
+                    if distance[to][i]<=time+t: break
+                    distance[to][i]=time+t
+                
+                heapq.heappush(q,(time+t, money+m,to))
 
+    return "Poor KCM"
 
-for _ in range(int(input())):
-    n,m,k=map(int,input().split())
-    distance= [[float('inf')]*(m+1) for i in range(n+1)]
-    graph = [[] for i in range(n+1)]
+for tt in range(int(input())):
+    n,M,k=map(int,input().split())
+    graph=[[] for i in range(n+1)]
     for _ in range(k):
-        u,v,c,d=map(int,input().split())
-        graph[u].append((v,c,d))
-    print(dijkstra())
+        a,b,c,d=map(int,input().split())
+        graph[a].append((b,c,d))
+    for i in range(1,n+1):graph[i].sort(key=lambda x: x[2])
+    print(sol())
