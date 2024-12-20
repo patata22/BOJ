@@ -4,29 +4,28 @@ dx=(-1,1,0,0,0,0)
 dy=(0,0,-1,1,0,0)
 dz=(0,0,0,0,-1,1)
 
+
 def rotate(x):
     return list(zip(*x[::-1]))
 
 def makeMaze(depth):
+    global answer
+    if answer==12: return
     if depth==5:
         if playBoard[0][0][0] and playBoard[4][4][4]:
-            global answer
             answer=min(answer,bfs())
         return
-    now=board[depth]
-    for i in range(4):
-        now=rotate(now)
+    for x in board[depth]:
         for j in range(5):
             if not used[j]:
                 used[j]=1
-                playBoard[j]=now
+                playBoard[j]=x
                 makeMaze(depth+1)
                 playBoard[j]=0
                 used[j]=0
 
 def bfs():
     q=deque()
-    s=[]
     visited=[[[0]*5 for i in range(5)] for i in range(5)]
     q.append((0,0,0))
     visited[0][0][0]=1
@@ -44,9 +43,13 @@ def bfs():
 
     return float('inf')
 
-board=[]
+board=[[] for i in range(5)]
 for _ in range(5):
-    board.append([list(map(int,input().split())) for i in range(5)])
+    temp=[list(map(int,input().split())) for i in range(5)]
+    board[_].append(temp)
+    for __ in range(3):
+        temp=rotate(temp)
+        board[_].append(temp)
 playBoard=[0]*5
 used=[0]*5
 answer=float('inf')
