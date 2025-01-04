@@ -5,7 +5,7 @@ input=sys.stdin.readline
 
 def calc(x,k):
     l=0
-    r=10000
+    r=1000
     total=2*x
     while l+1<r:
         mid=(l+r)//2
