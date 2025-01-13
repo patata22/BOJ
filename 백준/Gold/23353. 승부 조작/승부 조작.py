@@ -6,8 +6,8 @@ def checkR(x):
     dp=[[0]*2 for i in range(n)]
     for y in range(n):
         if board[x][y]==1:
-            dp[y][0]=max(dp[y][0],dp[y-1][0]+1)
-            dp[y][1]=max(dp[y][1],dp[y-1][1]+1)
+            dp[y][0]=dp[y-1][0]+1
+            dp[y][1]=dp[y-1][1]+1
         elif board[x][y]==2:
             dp[y][1]=max(dp[y][1],dp[y-1][0]+1)
     result=0
@@ -19,8 +19,8 @@ def checkC(y):
     dp=[[0]*2 for i in range(n)]
     for x in range(n):
         if board[x][y]==1:
-            dp[x][0]=max(dp[x][0],dp[x-1][0]+1)
-            dp[x][1]=max(dp[x][1],dp[x-1][1]+1)
+            dp[x][0]=dp[x-1][0]+1
+            dp[x][1]=dp[x-1][1]+1
         elif board[x][y]==2:
             dp[x][1]=max(dp[x][1],dp[x-1][0]+1)
     result=0
@@ -33,8 +33,8 @@ def checkRD(x,y):
     temp=0
     while x<n and y<n:
         if board[x][y]==1:
-            dp[temp][0]=max(dp[temp][0],dp[temp-1][0]+1)
-            dp[temp][1]=max(dp[temp][1],dp[temp-1][1]+1)
+            dp[temp][0]=dp[temp-1][0]+1
+            dp[temp][1]=dp[temp-1][1]+1
         elif board[x][y]==2:
             dp[temp][1]=max(dp[temp][1],dp[temp-1][0]+1)
         temp+=1
@@ -50,8 +50,8 @@ def checkLD(x,y):
     temp=0
     while x>=0 and y<n:
         if board[x][y]==1:
-            dp[temp][0]=max(dp[temp][0],dp[temp-1][0]+1)
-            dp[temp][1]=max(dp[temp][1],dp[temp-1][1]+1)
+            dp[temp][0]=dp[temp-1][0]+1
+            dp[temp][1]=dp[temp-1][1]+1
         elif board[x][y]==2:
             dp[temp][1]=max(dp[temp][1],dp[temp-1][0]+1)
         temp+=1
