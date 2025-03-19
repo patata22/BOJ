@@ -7,7 +7,7 @@ def sol(x):
         start,quantity,time=delivery.pop()
         heapq.heappush(q,(start+time,quantity))
     while need:
-        while q and q[0][0]<x: heapq.heappop(q)
+        while q and q[0][0]<=x: heapq.heappop(q)
         if not q: return False
         time,quantity=heapq.heappop(q)
         if quantity>=need:
@@ -16,7 +16,6 @@ def sol(x):
             return True
         else: need-=quantity
         
-
 for tt in range(int(input())):
     D,N,U=map(int,input().split())
     q=[]
