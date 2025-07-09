@@ -2,25 +2,18 @@ import sys
 input=sys.stdin.readline
 
 n,m,k=map(int,input().split())
+graph=[[] for i in range(n+1)]
 
-graph=[[-float('inf')]*n for i in range(n)]
 for _ in range(k):
     a,b,c=map(int,input().split())
-    a-=1
-    b-=1
-    
-    if a<b and graph[a][b]<c:
-        graph[a][b]=c
-dp=[[-float('inf')]*n for i in range(m)]
-dp[0][0]=0
-for k in range(1,m):
-    for i in range(n):
-        for j in range(i+1,n):
-            if dp[k][i]:
-                dp[k][j]=max(dp[k][j],dp[k-1][i]+graph[i][j])
+    if a>b: continue
+    graph[b].append((a,c))
 
-answer=0
-for i in range(m):
-        if dp[i][n-1]>answer:
-            answer=dp[i][n-1]
-print(answer)
+dp=[[-float('inf')]*(m+1) for i in range(n+1)]
+dp[1][1]=0
+for now in range(2,n+1):
+    for v in range(2,m+1):
+        for prev,d in graph[now]:
+            dp[now][v]=max(dp[now][v],dp[prev][v-1]+d)
+
+print(max(dp[-1]))
