@@ -7,6 +7,6 @@ while True:
     drop+=5*t*t
     if drop>=d: break
     answer+=1
-    v*=0.8
+    v*=8
+    w*=10
 print(answer)
-    
