@@ -1,28 +1,35 @@
+import heapq
+
 n,k=map(int,input().split())
-number = list(map(int,input().split()))
-using=[]
+number=list(map(int,input().split()))
+idx=[[] for i in range(k+1)]
+
+for i in range(k):
+    idx[number[i]].append(i)
+
+for x in idx:
+    x.append(float('inf'))
+    x.sort(reverse=True)
+
+number=number[::-1]
+
+q=[]
+multitap={}
 answer=0
-m=0
-while len(using)<n:
-    if number[m] not in using: using.append(number[m])
-    m+=1
-for i in range(m,k):
-    now = number[i]
-    if now in using: continue
-    target=-1
-    idx=-1
-    for x in using:
-        try:
-            temp_idx = number[i+1:].index(x)
-        except ValueError: temp_idx=float('inf')
-        if temp_idx>idx:
-            idx=temp_idx
-            target=x
-    using.remove(target)
-    using.append(now)
-    answer+=1
+
+while number:
+    now=number.pop()
+    idx[now].pop()
+    nxt=idx[now][-1]
+    if now in multitap or len(multitap)<n:
+        multitap[now]=nxt
+        heapq.heappush(q,(-nxt,now))
+    else:
+        while multitap[q[0][1]]!=-q[0][0]:  heapq.heappop(q)
+        answer+=1
+        target=heapq.heappop(q)[1]
+        multitap.pop(target)
+        multitap[now]=nxt
+        heapq.heappush(q,(-nxt,now))
+
 print(answer)
-        
-    
-    
-    
